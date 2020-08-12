@@ -1,0 +1,21 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t thomasshih/DockerLearning -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run thomasshih/DockerLearning npm test -- --coverage
+
+after_success:
+  - docker build -t thomasshih/client_PROD ./client
+  - docker build -t thomasshih/nginx_PROD ./nginx
+  - docker build -t thomasshih/server_PROD ./server
+  - docker build -t thomasshih/worker_PROD ./worker
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push thomasshih/client_PROD
+  - docker push thomasshih/nginx_PROD
+  - docker push thomasshih/server_PROD
+  - docker push thomasshih/worker_PROD
