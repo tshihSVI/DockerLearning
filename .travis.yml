@@ -15,7 +15,7 @@ after_success:
   - docker build -t tshih/worker_prod ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push tshih/client_PRO
+  - docker push tshih/client_prod
   - docker push tshih/nginx_prod
   - docker push tshih/server_prod
   - docker push tshih/worker_prod
