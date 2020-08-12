@@ -3,19 +3,19 @@ services:
   - docker
 
 before_install:
-  - docker build -t thomasshih/dockerlearning -f ./client/Dockerfile.dev ./client
+  - docker build -t tshih/dockerlearning -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run thomasshih/dockerlearning npm test -- --coverage
+  - docker run tshih/dockerlearning npm test -- --coverage
 
 after_success:
-  - docker build -t thomasshih/client_prod ./client
-  - docker build -t thomasshih/nginx_prod ./nginx
-  - docker build -t thomasshih/server_prod ./server
-  - docker build -t thomasshih/worker_prod ./worker
+  - docker build -t tshih/client_prod ./client
+  - docker build -t tshih/nginx_prod ./nginx
+  - docker build -t tshih/server_prod ./server
+  - docker build -t tshih/worker_prod ./worker
 
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push thomasshih/client_PRO
-  - docker push thomasshih/nginx_prod
-  - docker push thomasshih/server_prod
-  - docker push thomasshih/worker_prod
+  - docker push tshih/client_PRO
+  - docker push tshih/nginx_prod
+  - docker push tshih/server_prod
+  - docker push tshih/worker_prod
