@@ -1,14 +1,6 @@
 FROM node:alpine
-
-#Set working directory
-WORKDIR '/app'
-
-#Set up packages
+WORKDIR "/app"
 COPY ./package.json ./
 RUN npm install
-
-#Set up the client files
 COPY . .
-
-#Set default command
-CMD ["npm","run","start"]
+CMD ["npm", "run", "start"]
